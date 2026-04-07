@@ -54,7 +54,7 @@ function expenseAdd(newExpense){
         
         //Cria o icone da categoria
         const expenseIcon = document.createElement("img")
-        expenseIcon.setAttribute("src",`/img/${newExpense.category_id}.svg`)
+        expenseIcon.setAttribute("src",`./img/${newExpense.category_id}.svg`)
         expenseIcon.setAttribute("alt",newExpense.category_name)
 
         //Cria o info das despesas
@@ -80,7 +80,7 @@ function expenseAdd(newExpense){
         //Cria o icone da lixeira
         const removeIcon = document.createElement("img")
         removeIcon.classList.add("remove-icon")
-        removeIcon.setAttribute("src",`/img/remove.svg`)
+        removeIcon.setAttribute("src",`./img/remove.svg`)
         removeIcon.setAttribute("alt","remover")
 
         
@@ -116,16 +116,13 @@ function updateTotals(){
         for(let item = 0; item<items.length;item++){
             const itemAmount = items[item].querySelector(".expense-amount")
 
+            if(!itemAmount) continue
+
             let value = itemAmount.textContent.replace(/R\$\s*/,"").trim().replace(/\./g,"").replace(",",".")
 
             value = parseFloat(value)
 
-            if(isNaN(value)){
-                alert("Não foi possível calcular o total")
-            }
-
-            total += Number(value)
-            console.log(total)
+            if(!isNaN(value)) total += value
         }
 
         const symbolBRL = document.createElement("small")
