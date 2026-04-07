@@ -75,9 +75,7 @@ function expenseAdd(newExpense){
         //Cria o valor da despesa
         const expenseAmount = document.createElement("span")
         expenseAmount.classList.add('expense-amount')
-        expenseAmount.innerHTML = `<small>R$</small>${newExpense.amount
-            .toUpperCase()
-            .replace("R$","")}`
+        expenseAmount.innerHTML = `<small>R$</small>${newExpense.amount.replace(/R\$\s*/,"")}`
 
         //Cria o icone da lixeira
         const removeIcon = document.createElement("img")
@@ -118,7 +116,7 @@ function updateTotals(){
         for(let item = 0; item<items.length;item++){
             const itemAmount = items[item].querySelector(".expense-amount")
 
-            let value = itemAmount.textContent.replace(/[^\d,]/g,"").replace(",",".")
+            let value = itemAmount.textContent.replace(/R\$\s*/,"").trim().replace(/\./g,"").replace(",",".")
 
             value = parseFloat(value)
 
